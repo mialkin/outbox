@@ -4,4 +4,8 @@
         <PackageReference Include="Serilog.AspNetCore"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <ProjectReference Include="..\Outbox.Contracts\Outbox.Contracts.csproj"/>
+    </ItemGroup>
+
 </Project>
