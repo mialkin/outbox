@@ -3,6 +3,7 @@
         <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     </PropertyGroup>
     <ItemGroup>
+        <PackageVersion Include="Dapper" Version="2.1.66"/>
         <PackageVersion Include="Serilog.AspNetCore" Version="9.0.0"/>
     </ItemGroup>
 </Project>
