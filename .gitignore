@@ -1,0 +1,6 @@
+bin/
+obj/
+
+# JetBrains Rider
+.idea
+*.DotSettings.user
