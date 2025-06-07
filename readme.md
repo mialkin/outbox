@@ -12,3 +12,9 @@ Run API project:
 ```bash
 dotnet run --project src/Outbox.Api
 ```
+
+Run rocessor project:
+
+```bash
+dotnet run --project src/Outbox.Processor
+```
