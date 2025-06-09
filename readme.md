@@ -5,7 +5,17 @@
 - [↑ .NET 9](https://dotnet.microsoft.com/en-us/download/dotnet/9.0)
 - [↑ Docker Desktop](https://docs.docker.com/desktop/)
 
-## Run
+## Run infrastructure
+
+```bash
+docker compose --file infrastructure.yaml up --detach
+```
+
+```bash
+docker compose --file infrastructure.yaml down
+```
+
+## Run projects
 
 Run API project:
 
@@ -13,7 +23,7 @@ Run API project:
 dotnet run --project src/Outbox.Api
 ```
 
-Run rocessor project:
+Run processor project:
 
 ```bash
 dotnet run --project src/Outbox.Processor
