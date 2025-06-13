@@ -1,3 +1,5 @@
+using Npgsql;
+using Outbox.Api;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,7 +12,19 @@ builder.Host.UseSerilog((context, configuration) =>
 
 var services = builder.Services;
 
+services.AddSingleton<DatabaseInitializer>();
+
+services.AddSingleton(_ =>
+{
+    var connectionString = builder.Configuration.GetConnectionString("Database");
+    return new NpgsqlDataSourceBuilder(connectionString).Build();
+});
+
+
 var application = builder.Build();
+
+var initializer = application.Services.GetRequiredService<DatabaseInitializer>();
+await initializer.Execute();
 
 application.MapGet("/", () => "Hello World!");
 

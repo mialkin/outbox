@@ -4,8 +4,8 @@ services:
     container_name: outbox-postgres
     restart: unless-stopped
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DBNAME: postgres
+      POSTGRES_USER: outbox
+      POSTGRES_PASSWORD: outbox
+      POSTGRES_DBNAME: outbox
     ports:
       - 5130:5432
