@@ -20,11 +20,11 @@ docker compose --file infrastructure.yaml down
 Run API project:
 
 ```bash
-dotnet run --project src/Outbox.Api
+dotnet watch --project src/Outbox.Api --no-hot-reload
 ```
 
 Run processor project:
 
 ```bash
-dotnet run --project src/Outbox.Processor
+dotnet watch --project src/Outbox.Processor --no-hot-reload
 ```

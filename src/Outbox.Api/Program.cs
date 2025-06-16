@@ -32,7 +32,21 @@ var initializer = application.Services.GetRequiredService<DatabaseInitializer>()
 await initializer.Execute();
 
 application.UseSwagger();
-application.UseSwaggerUI();
+application.UseSwaggerUI(options =>
+{
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+    options.RoutePrefix = string.Empty;
+});
+
+application.MapGet("orders/{id:guid}", async (Guid id, NpgsqlDataSource dataSource) =>
+{
+    const string sql = "SELECT * FROM orders WHERE Id = @Id";
+
+    await using var connection = await dataSource.OpenConnectionAsync();
+    var order = await connection.QuerySingleOrDefaultAsync<Order>(sql, new { Id = id });
+
+    return order is null ? Results.NotFound() : Results.Ok(order);
+});
 
 application.MapPost("orders", async (CreateOrderDto orderDto, NpgsqlDataSource dataSource) =>
 {
@@ -83,16 +97,6 @@ application.MapPost("orders", async (CreateOrderDto orderDto, NpgsqlDataSource d
 
         await theConnection.ExecuteAsync(theSql, outboxMessage, theTransaction);
     }
-});
-
-application.MapGet("orders/{id:guid}", async (Guid id, NpgsqlDataSource dataSource) =>
-{
-    const string sql = "SELECT * FROM orders WHERE Id = @Id";
-
-    await using var connection = await dataSource.OpenConnectionAsync();
-    var order = await connection.QuerySingleOrDefaultAsync<Order>(sql, new { Id = id });
-
-    return order is null ? Results.NotFound() : Results.Ok(order);
 });
 
 application.Run();
