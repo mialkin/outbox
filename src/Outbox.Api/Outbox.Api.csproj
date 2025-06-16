@@ -4,6 +4,7 @@
         <PackageReference Include="Dapper"/>
         <PackageReference Include="Npgsql"/>
         <PackageReference Include="Serilog.AspNetCore"/>
+        <PackageReference Include="Swashbuckle.AspNetCore"/>
     </ItemGroup>
 
     <ItemGroup>
